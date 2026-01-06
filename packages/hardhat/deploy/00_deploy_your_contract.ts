@@ -3,7 +3,7 @@ import { DeployFunction } from "hardhat-deploy/types";
 import { Contract } from "ethers";
 
 // Update with your Batch number
-const BATCH_NUMBER = "20";
+const BATCH_NUMBER = "23";
 
 /**
  * Deploys a contract named "deployYourContract" using the deployer account and
