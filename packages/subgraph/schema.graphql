@@ -1,0 +1,17 @@
+type Builder @entity {
+  id: ID!
+  address: Bytes!
+  firstCheckIn: BigInt!
+  lastCheckIn: BigInt!
+  checkInCount: BigInt!
+  checkIns: [CheckIn!]! @derivedFrom(field: "builder")
+}
+
+type CheckIn @entity {
+  id: ID!
+  builder: Builder!
+  checkInContract: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
