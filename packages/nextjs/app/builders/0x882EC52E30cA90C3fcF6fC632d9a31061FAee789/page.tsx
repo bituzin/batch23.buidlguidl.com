@@ -1,21 +1,13 @@
 "use client";
 
-import { mainnet } from "viem/chains";
-import { useEnsAvatar, useEnsName } from "wagmi";
+import { NextPage } from "next/dist/types";
+import { useAddress } from "@scaffold-ui/hooks";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 
 const BUILDER_ADDRESS = "0x882EC52E30cA90C3fcF6fC632d9a31061FAee789" as const;
 
-const BuilderProfile = () => {
-  const { data: ensName } = useEnsName({
-    address: BUILDER_ADDRESS,
-    chainId: mainnet.id,
-  });
-
-  const { data: ensAvatar } = useEnsAvatar({
-    name: ensName || undefined,
-    chainId: mainnet.id,
-  });
+const ThisBeTomProfile: NextPage = () => {
+  const { ensAvatar } = useAddress({ address: BUILDER_ADDRESS });
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -41,7 +33,7 @@ const BuilderProfile = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex flex-col items-center gap-3 pt-4">
+        <div className="flex items-center justify-center gap-3 pt-4">
           <a
             href="https://github.com/tomfuertes"
             target="_blank"
@@ -58,24 +50,24 @@ const BuilderProfile = () => {
             href="https://twitter.com/thisbetom"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:opacity-70 transition-opacity opacity-40"
+            className="flex items-center gap-2 hover:opacity-70 transition-opacity"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
-            <span className="line-through">@thisbetom</span>
+            <span>@thisbetom</span>
           </a>
 
           <a
             href="https://linkedin.com/in/tomfuertes"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:opacity-70 transition-opacity opacity-40"
+            className="flex items-center gap-2 hover:opacity-70 transition-opacity"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
-            <span className="line-through">@tomfuertes</span>
+            <span>@tomfuertes</span>
           </a>
         </div>
       </div>
@@ -83,4 +75,4 @@ const BuilderProfile = () => {
   );
 };
 
-export default BuilderProfile;
+export default ThisBeTomProfile;
