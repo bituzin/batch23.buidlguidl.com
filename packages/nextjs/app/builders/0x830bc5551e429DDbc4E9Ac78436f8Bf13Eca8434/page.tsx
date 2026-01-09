@@ -30,7 +30,7 @@ const SOCIAL_LINKS = [
     icon: icons.InstagramIcon,
   },
   {
-    href: "https://facebook.com/guy_do_or_die",
+    href: "https://facebook.com/guy.do.or.die",
     icon: icons.FacebookIcon,
   },
 ];
