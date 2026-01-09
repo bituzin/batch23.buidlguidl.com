@@ -1,9 +1,3 @@
----
-description:
-globs:
-alwaysApply: true
----
-
 This codebase contains Scaffold-ETH 2 (SE-2), everything you need to build dApps on Ethereum. Its tech stack is NextJS, RainbowKit, Wagmi and Typescript. Supports Hardhat and Foundry.
 
 It's a yarn monorepo that contains two main packages:
