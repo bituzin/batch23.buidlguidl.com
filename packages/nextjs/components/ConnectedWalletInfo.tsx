@@ -2,13 +2,7 @@
 
 import { zeroAddress } from "viem";
 import { useAccount } from "wagmi";
-import {
-  CheckCircleIcon,
-  ClipboardDocumentCheckIcon,
-  ExclamationTriangleIcon,
-  UserIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export const ConnectedWalletInfo = () => {
@@ -33,51 +27,24 @@ export const ConnectedWalletInfo = () => {
   if (!isConnected) return null;
 
   return (
-    <div className="flex flex-col items-end gap-2">
-      <div className="rounded-xl border border-base-300 bg-base-200 mr-2 px-4 py-3 space-y-2 text-sm shadow-sm min-w-[220px]">
-        <div className="flex items-center gap-2">
-          <UserIcon className="h-4 w-4 text-base-content/70" />
-          <span className="flex-1">Batch Member</span>
-
-          {isBatchMember ? (
-            <span className="flex items-center gap-1 text-success">
-              <CheckCircleIcon className="h-4 w-4" />
-              Yes
-            </span>
-          ) : (
-            <span className="flex items-center gap-1 text-error">
-              <XCircleIcon className="h-4 w-4" />
-              No
-            </span>
-          )}
+    <div className="flex items-center gap-2 mr-2">
+      {isBatchMember && hasCheckedIn && (
+        <div className="p-1 tooltip tooltip-left tooltip-success" data-tip="Checked in">
+          <CheckCircleIcon className="h-5 w-5 text-success" />
         </div>
+      )}
 
-        {isBatchMember && (
-          <div className="flex items-center gap-2">
-            <ClipboardDocumentCheckIcon className="h-4 w-4 text-base-content/70" />
-            <span className="flex-1">Checked In</span>
+      {isBatchMember && !hasCheckedIn && (
+        <div className="p-1 tooltip tooltip-left tooltip-warning" data-tip="Not checked in yet">
+          <ClockIcon className="h-5 w-5 text-yellow-500" />
+        </div>
+      )}
 
-            {hasCheckedIn ? (
-              <span className="flex items-center gap-1 text-success">
-                <CheckCircleIcon className="h-4 w-4" />
-                Done
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 text-warning">
-                <XCircleIcon className="h-4 w-4" />
-                Not yet
-              </span>
-            )}
-          </div>
-        )}
-
-        {!isBatchMember && (
-          <div className="flex items-center gap-2 rounded-lg bg-warning/10 px-2 py-1 text-warning">
-            <ExclamationTriangleIcon className="h-4 w-4" />
-            <span className="text-xs font-medium">Sorry! You&apos;re not in allowlist</span>
-          </div>
-        )}
-      </div>
+      {!isBatchMember && (
+        <div className="p-1 tooltip tooltip-left tooltip-warning" data-tip="Not a member">
+          <XCircleIcon className="h-5 w-5 text-red-500" />
+        </div>
+      )}
     </div>
   );
 };
