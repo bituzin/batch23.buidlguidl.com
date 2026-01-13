@@ -20,7 +20,6 @@ const Repeater: React.FC<RepeaterProps> = ({ containerClasses = "", containerSty
     function measure() {
       if (containerRef.current) {
         setContainerHeight(containerRef.current.clientHeight);
-        console.log("containerRef.current.clientHeight", containerRef.current.clientHeight);
       }
     }
 

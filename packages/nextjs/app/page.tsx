@@ -1,25 +1,16 @@
 import Link from "next/link";
 import { CodeHashesBackground } from "./CodeHashesBackground";
+import { HeroBatchCard } from "./HeroBatchCard";
 import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-const Home: NextPage = async () => {
+const Home: NextPage = () => {
   return (
     <>
       <CodeHashesBackground />
 
       <div className="flex items-center flex-col grow pt-10">
-        <div className="p-8 bg-base-100/30 border border-base-content">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Batch 23</span>
-          </h1>
-          <p className="text-center text-lg">Get started by taking a look at your batch GitHub repository.</p>
-          <p className="text-lg flex gap-2 justify-center">
-            <span className="font-bold">Checked in builders count:</span>
-            <span>To Be Implemented</span>
-          </p>
-        </div>
+        <HeroBatchCard />
 
         <div className="grow w-full mt-16 px-8 py-12">
           <div className="flex justify-center items-center gap-12 flex-col md:flex-row">

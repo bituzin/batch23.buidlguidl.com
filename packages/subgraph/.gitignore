@@ -1,0 +1,17 @@
+# Ignore local development data
+data/
+node_modules/
+generated/
+build/
+
+# Environment files
+.env
+
+# IDE
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs
+*.log

@@ -1,19 +1,10 @@
-import GET_BUILDERS_PLACEHOLDER from "./GET_BUILDERS_PLACEHOLDER";
 import { InfiniteHorizontalScroll } from "~~/components/InfiniteHorizontalScroll";
 import Repeater from "~~/components/Repeater";
-
-async function getBuilders(): Promise<{ address: string; checkInTxHash: string; checkInContract: string }[]> {
-  return GET_BUILDERS_PLACEHOLDER.data.builders.map(builder => {
-    return {
-      address: builder.address,
-      checkInTxHash: builder.checkIns[0].transactionHash,
-      checkInContract: builder.checkIns[0].checkInContract,
-    };
-  });
-}
+import { type BuilderWithCheckIn, getBuildersAndCheckIns } from "~~/services/graph/client";
 
 export const CodeHashesBackground = async () => {
-  const builders: any[] = await getBuilders();
+  const builders: BuilderWithCheckIn[] = await getBuildersAndCheckIns();
+
   return (
     <div className="absolute r-0 l-0 w-full h-full b-0 t-0 dark:bg-gray-950 bg-gray-300 overflow-hidden -z-10">
       <Repeater
@@ -27,7 +18,7 @@ export const CodeHashesBackground = async () => {
           className={`dark:text-green-900/50 text-green-100/75 font-mono ${builders.length ? "animate-fade-in-home" : ""}`}
         >
           {builders.map((builder, index) => {
-            const text = `Builder:${builder.address} checkIn hash:${builder.checkInTxHash} contract:${builder.checkInContract}`;
+            const text = `Builder:${builder.address} checkIn hash:${builder.checkIns[0].transactionHash} contract:${builder.checkIns[0].checkInContract}`;
             return (
               <InfiniteHorizontalScroll
                 key={builder.address}
@@ -46,7 +37,7 @@ export const CodeHashesBackground = async () => {
         </div>
       </Repeater>
       <div className="relative h-full w-full bg-transparent">
-        <div className="w-full h-32 bg-gradient-to-t from-green-600/45 dark:from-green-600/70 blur-3xl via-transparent to-transparent opacity-40 animate-gradient-up pointer-events-none" />
+        <div className="w-full h-32 bg-gradient-to-t from-green-600/60 dark:from-green-600/70 blur-3xl via-transparent to-transparent opacity-40 animate-gradient-up pointer-events-none" />
       </div>
     </div>
   );

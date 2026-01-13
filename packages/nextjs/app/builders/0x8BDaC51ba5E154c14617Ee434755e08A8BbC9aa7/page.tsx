@@ -61,7 +61,7 @@ const PageOfShrestha: NextPage = () => {
             {["DeFi", "Smart Contract Auditing"].map(interest => (
               <li
                 key={interest}
-                className="rounded-md bg-purple-50 px-2 py-1 text-xs text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
+                className="mb-4 rounded-md bg-purple-50 px-2 py-1 text-xs text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
               >
                 {interest}
               </li>

@@ -83,6 +83,15 @@ const NikhilRaikwarPage: NextPage = () => {
               >
                 <GlobeAltIcon className="w-6 h-6 text-emerald-500" />
               </a>
+              <a
+                href="https://speedrunethereum.com/builders/0x70B2D7dBEcC2238e0d2A3159320E11D7D85dEDe8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-circle btn-ghost border border-base-300 hover:bg-base-300"
+                title="SpeedRunEthereum"
+              >
+                <span className="text-xl">🏰</span>
+              </a>
             </div>
           </div>
 
