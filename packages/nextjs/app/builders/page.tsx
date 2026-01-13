@@ -1,6 +1,18 @@
 import Link from "next/link";
 import { Address } from "@scaffold-ui/components";
+import { getAddress } from "viem";
 import { Builder, getBuilders } from "~~/services/graph/client";
+
+const BUILDERS_WITH_PROFILES = [
+  "0x1495d3a454eB1301a0b4530176099456639ef110",
+  "0x2A5F12879DFC3897c827643F0a6fDdCb10E88fEa",
+  "0x47130fce19C0A6441b4780c5d67B4be7cf4c9ad9",
+  "0x830bc5551e429DDbc4E9Ac78436f8Bf13Eca8434",
+  "0x882EC52E30cA90C3fcF6fC632d9a31061FAee789",
+  "0x8BDaC51ba5E154c14617Ee434755e08A8BbC9aa7",
+  "0xA1F881691f1C687E23DAe139C4Ec243480420EDD",
+  "0xb26CEe94F8A0DFcBc2e711c16a2792f71da755a1",
+].map(addr => getAddress(addr));
 
 export default async function BuildersPage() {
   let builders: Builder[] = [];
@@ -73,24 +85,35 @@ export default async function BuildersPage() {
             </tr>
           </thead>
           <tbody>
-            {builders.map(builder => (
-              <tr key={builder.id} className="hover:bg-base-200 transition-colors">
-                <td>
-                  <Address address={builder.address} />
-                </td>
-                <td className="font-mono">{builder.checkInCount}</td>
-                <td>{new Date(builder.firstCheckIn * 1000).toLocaleDateString()}</td>
-                <td>{new Date(builder.lastCheckIn * 1000).toLocaleString()}</td>
-                <td>
-                  <Link
-                    href={`/builders/${builder.address}`}
-                    className="btn btn-outline btn-sm btn-primary rounded-full px-4 hover:scale-105 transition-transform"
-                  >
-                    View Profile
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {builders.map(builder => {
+              const checksumAddress = getAddress(builder.address);
+              const hasProfile = BUILDERS_WITH_PROFILES.includes(checksumAddress);
+
+              return (
+                <tr key={builder.id} className="hover:bg-base-200 transition-colors">
+                  <td>
+                    <Address address={builder.address} />
+                  </td>
+                  <td className="font-mono">{builder.checkInCount}</td>
+                  <td>{new Date(builder.firstCheckIn * 1000).toLocaleDateString()}</td>
+                  <td>{new Date(builder.lastCheckIn * 1000).toLocaleString()}</td>
+                  <td>
+                    {hasProfile ? (
+                      <Link
+                        href={`/builders/${checksumAddress}`}
+                        className="btn btn-outline btn-sm btn-primary rounded-full px-4 hover:scale-105 transition-transform"
+                      >
+                        View Profile
+                      </Link>
+                    ) : (
+                      <button className="btn btn-active btn-ghost btn-sm rounded-full px-4 opacity-50 cursor-not-allowed">
+                        No Profile
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
             {builders.length === 0 && (
               <tr>
                 <td colSpan={5} className="py-16">
