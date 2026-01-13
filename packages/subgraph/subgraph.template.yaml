@@ -1,0 +1,25 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BatchRegistry
+    network: {{network}}
+    source:
+      address: "{{address}}"
+      abi: BatchRegistry
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Builder
+        - CheckIn
+      abis:
+        - name: BatchRegistry
+          file: ./abis/BatchRegistry.json
+      eventHandlers:
+        - event: CheckedIn(bool,address,address)
+          handler: handleCheckedIn
+      file: ./src/mapping.ts
