@@ -1,22 +1,28 @@
 import Link from "next/link";
 import { Address } from "@scaffold-ui/components";
+import fs from "fs";
+import path from "path";
 import { getAddress } from "viem";
 import { Builder, getBuilders } from "~~/services/graph/client";
 
-const BUILDERS_WITH_PROFILES = [
-  "0x1495d3a454eB1301a0b4530176099456639ef110",
-  "0x2A5F12879DFC3897c827643F0a6fDdCb10E88fEa",
-  "0x47130fce19C0A6441b4780c5d67B4be7cf4c9ad9",
-  "0x830bc5551e429DDbc4E9Ac78436f8Bf13Eca8434",
-  "0x882EC52E30cA90C3fcF6fC632d9a31061FAee789",
-  "0x8BDaC51ba5E154c14617Ee434755e08A8BbC9aa7",
-  "0xA1F881691f1C687E23DAe139C4Ec243480420EDD",
-  "0xb26CEe94F8A0DFcBc2e711c16a2792f71da755a1",
-].map(addr => getAddress(addr));
+// Dynamically get list of builders with profiles
+const getBuildersWithProfiles = async () => {
+  try {
+    const buildersDirectory = path.join(process.cwd(), "app", "builders");
+    const entries = await fs.promises.readdir(buildersDirectory, { withFileTypes: true });
+    return entries
+      .filter(entry => entry.isDirectory() && entry.name.startsWith("0x"))
+      .map(entry => getAddress(entry.name));
+  } catch (error) {
+    console.error("Error reading builders directory:", error);
+    return [];
+  }
+};
 
 export default async function BuildersPage() {
   let builders: Builder[] = [];
   let error: string | null = null;
+  const buildersWithProfiles = await getBuildersWithProfiles();
 
   try {
     builders = await getBuilders();
@@ -87,7 +93,7 @@ export default async function BuildersPage() {
           <tbody>
             {builders.map(builder => {
               const checksumAddress = getAddress(builder.address);
-              const hasProfile = BUILDERS_WITH_PROFILES.includes(checksumAddress);
+              const hasProfile = buildersWithProfiles.includes(checksumAddress);
 
               return (
                 <tr key={builder.id} className="hover:bg-base-200 transition-colors">
