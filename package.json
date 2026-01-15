@@ -5,7 +5,8 @@
   "workspaces": {
     "packages": [
       "packages/hardhat",
-      "packages/nextjs"
+      "packages/nextjs",
+      "packages/subgraph"
     ]
   },
   "scripts": {
@@ -48,12 +49,19 @@
     "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
     "ipfs": "yarn workspace @se-2/nextjs ipfs",
     "vercel:login": "yarn workspace @se-2/nextjs vercel:login",
-    "verify": "yarn hardhat:verify"
+    "verify": "yarn hardhat:verify",
+    "subgraph:run-node": "cd packages/subgraph && docker compose up",
+    "subgraph:stop-node": "cd packages/subgraph && docker compose down",
+    "subgraph:clean-node": "cd packages/subgraph && rimraf data",
+    "subgraph:local-ship": "yarn workspace @se-2/subgraph local-ship",
+    "subgraph:deploy": "yarn workspace @se-2/subgraph deploy",
+    "graphclient:build": "yarn workspace @se-2/nextjs graphclient:build"
   },
   "packageManager": "yarn@3.2.3",
   "devDependencies": {
     "husky": "^9.1.6",
-    "lint-staged": "^15.2.10"
+    "lint-staged": "^15.2.10",
+    "rimraf": "^6.1.2"
   },
   "engines": {
     "node": ">=20.18.3"

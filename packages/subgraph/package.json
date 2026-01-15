@@ -1,0 +1,30 @@
+{
+    "name": "@se-2/subgraph",
+    "version": "0.0.1",
+    "scripts": {
+        "abi-copy": "ts-node scripts/abi_copy.ts",
+        "codegen": "graph codegen",
+        "build": "graph build",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ buidlguidl/batch23-subgraph",
+        "local-create": "graph create --node http://localhost:8020/ buidlguidl/batch23-subgraph",
+        "local-remove": "graph remove --node http://localhost:8020/ buidlguidl/batch23-subgraph",
+        "local-deploy": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 buidlguidl/batch23-subgraph --version-label v0.0.1",
+        "local-prepare": "ts-node scripts/prepare-local-manifest.ts",
+        "local-ship": "yarn local-create || true && yarn local-prepare && yarn abi-copy && yarn codegen && yarn build && yarn local-deploy",
+        "test": "graph test"
+    },
+    "dependencies": {
+        "@graphprotocol/graph-cli": "^0.80.0",
+        "@graphprotocol/graph-ts": "^0.32.0"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/js-yaml": "^4.0.9",
+        "@types/node": "^25.0.3",
+        "chalk": "^4.1.2",
+        "js-yaml": "^4.1.1",
+        "matchstick-as": "^0.6.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    }
+}

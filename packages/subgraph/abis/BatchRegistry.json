@@ -1,0 +1,27 @@
+[
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "first",
+                "type": "bool"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "builder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "checkInContract",
+                "type": "address"
+            }
+        ],
+        "name": "CheckedIn",
+        "type": "event"
+    }
+]
