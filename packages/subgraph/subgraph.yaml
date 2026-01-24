@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: BatchRegistry
-    network: localhost
+    network: arbitrum-one
     source:
       address: "0xDfa17B7e7b77c741e7C08f3F9fBa421e08c5EE6B"
       abi: BatchRegistry
-      startBlock: 0
+      startBlock: 418605653
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

@@ -7,8 +7,7 @@ export type Builder = {
 };
 
 export const SUBGRAPH_URL =
-  process.env.NEXT_PUBLIC_SUBGRAPH_URL ||
-  "https://api.studio.thegraph.com/query/1722630/batch-23-buidlguidl/version/latest";
+  process.env.NEXT_PUBLIC_SUBGRAPH_URL || "https://api.studio.thegraph.com/query/1724087/batch-23/version/latest";
 
 export const GET_BUILDERS_QUERY = `
   query GetBuilders {

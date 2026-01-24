@@ -1,0 +1,17 @@
+@keyframes vertical-marquee {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.animate-vertical-marquee {
+  animation-name: vertical-marquee;
+
+  animation-duration: var(--animate-vertical-marquee-duration, 6000s);
+  animation-timing-function: var(--animate-vertical-marquee-timing, linear);
+  animation-iteration-count: var(--animate-vertical-marquee-iteration, infinite);
+  animation-direction: var(--animate-vertical-marquee-direction, normal);
+  animation-delay: var(--animate-vertical-marquee-delay, 0s);
+}

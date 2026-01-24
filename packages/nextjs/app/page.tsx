@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CodeHashesBackground } from "./CodeHashesBackground";
+import { CodeHashesVerticalBackground } from "./CodeHashesVerticalBackground";
 import { HeroBatchCard } from "./HeroBatchCard";
 import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -7,7 +7,7 @@ import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 const Home: NextPage = () => {
   return (
     <>
-      <CodeHashesBackground />
+      <CodeHashesVerticalBackground />
 
       <div className="flex items-center flex-col grow pt-10">
         <HeroBatchCard />
