@@ -1,21 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCodeDirection } from "~~/contexts/CodeDirectionContext";
 
 export const SwitchCodeDirection = ({ className }: { className?: string }) => {
   const [mounted, setMounted] = useState(false);
-  const [isVertical, setIsVertical] = useState(false);
+  const { isVertical, setIsVertical } = useCodeDirection();
 
   useEffect(() => {
     setMounted(true);
-    setIsVertical(localStorage.getItem("codeDirection") === "vertical");
   }, []);
 
   const toggle = () => {
-    const val = !isVertical;
-    setIsVertical(val);
-    localStorage.setItem("codeDirection", val ? "vertical" : "horizontal");
-    window.dispatchEvent(new CustomEvent("codeDirectionChange", { detail: { isVertical: val } }));
+    setIsVertical(!isVertical);
   };
 
   if (!mounted) return null;

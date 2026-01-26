@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCodeDirection } from "~~/contexts/CodeDirectionContext";
 
 export const DynamicCodeHashesBackground = ({
   horizontalBg,
@@ -9,24 +10,11 @@ export const DynamicCodeHashesBackground = ({
   horizontalBg: React.ReactNode;
   verticalBg: React.ReactNode;
 }) => {
-  const [isVertical, setIsVertical] = useState(false);
+  const { isVertical } = useCodeDirection();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("codeDirection");
-    if (stored === "vertical") {
-      setIsVertical(true);
-    }
-
-    const handleDirectionChange = (event: CustomEvent) => {
-      setIsVertical(event.detail.isVertical);
-    };
-
-    window.addEventListener("codeDirectionChange", handleDirectionChange as EventListener);
-    return () => {
-      window.removeEventListener("codeDirectionChange", handleDirectionChange as EventListener);
-    };
   }, []);
 
   if (!mounted) return horizontalBg;
